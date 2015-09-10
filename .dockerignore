@@ -5,3 +5,6 @@
 Makefile
 env_make
 README.md
+Dockerfile
+
+destroy.sh

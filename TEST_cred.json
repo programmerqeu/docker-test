@@ -1,7 +1,0 @@
-{
-	"dockertest": {
-		"appenv": "TEST",
-		"appid": "TEST",
-		"makenv": "TEST",
-	}
-}

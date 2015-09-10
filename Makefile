@@ -9,12 +9,11 @@ INSTANCE = dockertest
 
 .PHONY: build push shell run start stop rm release
 
-credentials:
-	
-	sh credentials.sh -e TEST=$(DOCKERTEST_ENV_VARIABLE)
-
 build:
 	docker build -t $(NS)/$(REPO):$(VERSION) .
+
+credentials:
+	sh credentials.sh $(MAKE_ENV_VARIABLE)
 
 push:
 	docker push $(NS)/$(REPO):$(VERSION)
@@ -36,5 +35,3 @@ rm:
 
 release: build
 	make push -e VERSION=$(VERSION)
-
-default: build

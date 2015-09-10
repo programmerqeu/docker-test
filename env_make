@@ -1,5 +1,10 @@
 PORTS = -p 21:21
 
-VOLUMES = -v /var/log/docker:/var/log
+VOLUMES = -v /Users/machschlanke/Test/docker-data:/home/data
 
-DOCKERTEST_ENV_VARIABLE=TEST
+MAKE_ENV_VARIABLE=makeEnv
+
+ENV = \
+  -e FILE_ENV_FOO=FooEnvFromFile \
+  -e FILE_ENV_BAR=BarEnvFromFile \
+  -e FILE_ENV_ZOO=ZooEnvFromFile

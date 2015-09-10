@@ -1,14 +1,17 @@
 FROM ubuntu:latest
+
 RUN  apt-get -y update && apt-get install -y mc
 
 ENV APP_ID "dockertest"
-ENV APP_ENV "EnvVarFromDockerFile"
+RUN printenv
 
 COPY . home
 WORKDIR home
 RUN pwd && \
-    ls && \
-    sh credentials.sh && \
+    sh credentials.sh ${APP_ID} && \
     echo "AppID: ${APP_ID}"
+
+RUN mkdir data
+
 
 ENTRYPOINT mc
