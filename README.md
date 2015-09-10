@@ -1,36 +1,26 @@
 # Docker test
 
-## Build
+## Custom Build
 ```
-docker build -t ubut .
+docker build -t dockertest .
 ```
 
 ## Run
 ```
-docker run -t -i ubut:latest /bin/bash
+docker run -t -i dockertest:latest /bin/bash
 ```
 
 ## Usage
 
-It supports all the basic tasks:
+It supports all the basic docker tasks:
 
-- build (build image)
-- run (run container's default cmd)
-- shell (run bash in container)
-- start (start container in daemon mode)
-- stop (stop the container)
-- rm (remove the container)
-- push (push container to registry, default is private registry)
+- make build (build image)
+- make run (run container's default cmd)
+- make shell (run bash in container)
+- make start (start container in daemon mode)
+- make stop (stop the container)
+- make rm (remove the container)
+- make push (push container to registry, default is private registry)
 
-Default task is to build the container using Dockerfile in the same
+Default task is to **build** the container using Dockerfile in the same
 directory as is the Makefile.
-
-
-## Example
-
-See the `Makefile.example` file. The `REPO` serves as sort of a
-sub-directory in the namespace of the private registry so use it to
-group related images together, like in the example where related
-images are stored under the `hain` so all components of the whole app
-are always `hain/<name of the service>`. In case of docker hub it is
-the name of your repo.
