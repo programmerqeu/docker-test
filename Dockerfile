@@ -14,4 +14,4 @@ RUN pwd && \
 RUN mkdir data
 
 
-ENTRYPOINT mc
+ENTRYPOINT sh app.sh
