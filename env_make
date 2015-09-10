@@ -1,0 +1,5 @@
+PORTS = -p 21:21
+
+VOLUMES = -v /var/log/docker:/var/log
+
+DOCKERTEST_ENV_VARIABLE=TEST

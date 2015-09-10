@@ -1,13 +1,12 @@
 #!/bin/bash
 
-# piball
+# dockertest
 #
 # LICENSE:    MIT
 #
-# @project    piball
+# @project    dockertest
 # @package    deployment
 # @author     André Lademann <vergissberlin@googlemail.com>
-# @copyright  piball.io
 # @license    http://opensource.org/licenses/MIT
 
 

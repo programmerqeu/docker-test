@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# piball
+# dockertest
 #
 # LICENSE:    MIT
 #
@@ -9,16 +9,18 @@
 # @author     André Lademann <vergissberlin@googlemail.com>
 # @license    http://opensource.org/licenses/MIT
 
-echo "The env var is: ${APP_ENV}"
-echo "The app id is: ${APP_ID}"
+echo "The env var is: ${*}"
+echo "The env var is: ${TEST}"
 
 printf '{
 	"dockertest": {
 		"appenv": "%s",
-		"appid": "%s"
+		"appid": "%s",
+		"makenv": "%s",
 	}
 }\n'\
-	$APP_ENV \
-	$APP_ID \
-	> "${APP_ID}_cred.json"
+	$0 \
+	$0 \
+	$0 \
+	> "${0}_cred.json"
 
