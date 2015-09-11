@@ -10,18 +10,39 @@
 # Use the latest ubuntu image as base
 FROM ubuntu:latest
 
-# Install Midnight Commander for testing purpose
-RUN  apt-get -y update && apt-get install -y mc
+# Set Docker ENV variables
+ENV APP_ID="dockertest" \
+	APP_NAME="Docker Test Environment" \
+	DB_NAME="docker" \
+	DB_USER="docker" \
+	DB_PASS="docker" \
+	DB_RIGHT="READ" \
+	DB_URL="file:/var/db/database.sql" \
+	BUILD_DEPENDENCIES="\
+            ca-certificates \
+            curl \
+            git-core \
+            python3 \
+            mysql-client \
+            mysql-server \
+            "
 
-# Set Docker ENv variables
-ENV APP_ID "dockertest"
+COPY scripts /scripts
+COPY setup/database.sql /var/db/database.sql
 
-# Copy local data to container and change to this directory
-COPY . home
 WORKDIR home
 
+RUN /bin/bash /scripts/10-install-build-deps.sh \
+ && /bin/bash /scripts/30-database.sh \
+ && /bin/bash /scripts/40-credentials.sh \
+ && /bin/bash /scripts/50-cleanup.sh \
+ && rm -rf /scripts
+
 # Create credentials with Docker ENV variables
-RUN sh credentials.sh ${APP_ID}
+# setup/credentials.sh ${APP_ID} ${APP_NAME}
+RUN /bin/bash /scripts/60-app.sh
+
+EXPOSE 3306
 
 # Create credentials with param ENV vairables
 ENTRYPOINT sh app.sh

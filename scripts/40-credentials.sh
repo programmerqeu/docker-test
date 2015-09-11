@@ -1,18 +1,18 @@
 #!/bin/bash
+set -ex
 
 # dockertest
 #
 # LICENSE:    MIT
 #
 # @project    dockertest
-# @package    deployment
+# @package    scripts
 # @author     André Lademann <vergissberlin@googlemail.com>
 # @license    http://opensource.org/licenses/MIT
 
 echo "All parameter: ${*}"
 echo "0 parameter: ${0}"
 echo "1 parameter: ${1}"
-# printenv
 
 printf '{
 	"dockertest": {
@@ -24,5 +24,5 @@ printf '{
 	$1 \
 	$1 \
 	$1 \
-	> "${1}_cred.json"
+	> "/home/${1}_cred.json"
 

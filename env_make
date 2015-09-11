@@ -1,6 +1,6 @@
 PORTS = -p 21:21
 
-VOLUMES = -v /Users/machschlanke/Test/docker-data:/data
+VOLUMES = -v ~/Test/docker-data:/data
 
 MAKE_ENV_VARIABLE=makeEnv
 

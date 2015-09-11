@@ -1,16 +1,14 @@
 #!/bin/bash
+set -ex
 
 # dockertest
 #
 # LICENSE:    MIT
 #
 # @project    dockertest
-# @package    deployment
+# @package    scripts
 # @author     André Lademann <vergissberlin@googlemail.com>
 # @license    http://opensource.org/licenses/MIT
 
-
-# Delete all containers
-docker rm $(docker ps -a -q)
-# Delete all images
-docker rmi $(docker images -q)
+/bin/bash /scripts/40-credentials.sh ${FILE_ENV_ZOO}
+#mc

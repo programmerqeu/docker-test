@@ -2,9 +2,8 @@
 .git
 .gitignore
 .idea
-Makefile
 env_make
-README.md
 Dockerfile
-
-destroy.sh
+Makefile
+README.md
+scripts/destroy.sh

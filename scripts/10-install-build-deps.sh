@@ -1,13 +1,14 @@
 #!/bin/bash
+set -ex
 
 # dockertest
 #
 # LICENSE:    MIT
 #
 # @project    dockertest
-# @package    run
+# @package    scripts
 # @author     André Lademann <vergissberlin@googlemail.com>
 # @license    http://opensource.org/licenses/MIT
 
-sh credentials.sh ${FILE_ENV_ZOO}
-mc
+apt-get -y update
+apt-get install -y $BUILD_DEPENDENCIES --no-install-recommends

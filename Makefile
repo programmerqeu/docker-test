@@ -13,7 +13,11 @@ build:
 	docker build -t $(NS)/$(REPO):$(VERSION) .
 
 credentials:
-	sh credentials.sh $(MAKE_ENV_VARIABLE)
+	/bin/bash setup/credentials.sh $(MAKE_ENV_VARIABLE)
+
+destroy:
+	docker rm $(docker ps -a -q)
+	docker rmi -f $(docker images -q)
 
 push:
 	docker push $(NS)/$(REPO):$(VERSION)
