@@ -16,13 +16,12 @@ ENV APP_ID="dockertest" \
 	DB_NAME="docker" \
 	DB_USER="docker" \
 	DB_PASS="docker" \
+	DB_PASS_ROOT="docker" \
 	DB_RIGHT="READ" \
 	DB_URL="file:/var/db/database.sql" \
+	DB_ALLOW_EMPTY_PASSWORD="true" \
 	BUILD_DEPENDENCIES="\
-            ca-certificates \
-            curl \
-            git-core \
-            python3 \
+			curl \
             mysql-client \
             mysql-server \
             "
@@ -40,9 +39,15 @@ RUN /bin/bash /scripts/10-install-build-deps.sh \
 
 # Create credentials with Docker ENV variables
 # setup/credentials.sh ${APP_ID} ${APP_NAME}
-RUN /bin/bash /scripts/60-app.sh
+
+# Install starting script
+COPY scripts/60-app.sh /usr/local/bin/app.sh
+RUN chmod +x /usr/local/bin/app.sh
+
+# Data
+VOLUME /var/lib/mysql
 
 EXPOSE 3306
 
 # Create credentials with param ENV vairables
-ENTRYPOINT sh app.sh
+ENTRYPOINT /usr/local/bin/app.sh

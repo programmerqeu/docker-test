@@ -1,6 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `docker` DEFAULT CHARSET=utf8;
-
-USE `docker`;
+CREATE DATABASE  IF NOT EXISTS `dname` DEFAULT CHARSET=utf8;
+USE `dname`;
 
 --
 -- Table structure for table `Lehrveranstaltung`
@@ -13,7 +12,7 @@ CREATE TABLE `docker` (
   `ship` int(11) DEFAULT NULL,
   `port` varchar(256) DEFAULT NULL,
   `time` varchar(16) DEFAULT NULL,
-  PRIMARY KEY (`LVID`)
+  PRIMARY KEY (`id`)
 );
 
 --

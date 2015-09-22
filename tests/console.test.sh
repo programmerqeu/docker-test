@@ -1,5 +1,4 @@
 #!/bin/bash
-set -ex
 
 # dockertest
 #
@@ -9,11 +8,12 @@ set -ex
 # @package    scripts
 # @author     André Lademann <vergissberlin@googlemail.com>
 # @license    http://opensource.org/licenses/MIT
-# @link		  https://github.com/nkratzke/EasyMySQL/blob/master/Dockerfile
 
-# Install database
+. ../lib/console.sh
 
 
-# Configure database
-sed -i -e"s/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
-
+# Messages
+messageInfo 	"Hello World"
+messageCode 	"<<Super>> \$code"
+messageOk 		"All OK"
+messageError 	1 "Go exit"
