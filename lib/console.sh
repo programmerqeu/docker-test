@@ -13,6 +13,7 @@
 red='\033[01;31m'
 blue='\033[01;34m'
 green='\033[01;32m'
+yellow='\033[01;35m'
 norm='\033[0m'
 code='\033[40m'
 
@@ -36,5 +37,5 @@ function messageInfo {
 }
 
 function messageCode {
-	echo -e "[ ${blue}code${norm} ]\t${code} $* ${norm}"
+	echo -e "[ ${yellow}code${norm} ]\t${code} $* ${norm}"
 }

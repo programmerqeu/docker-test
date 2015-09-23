@@ -17,25 +17,22 @@ ENV APP_ID="dockertest" \
 	DB_USER="docker" \
 	DB_PASS="docker" \
 	DB_PASS_ROOT="docker" \
-	DB_RIGHT="READ" \
-	DB_URL="file:/var/db/database.sql" \
+	DB_FILE="/setup/database.sql" \
 	DB_ALLOW_EMPTY_PASSWORD="true" \
 	BUILD_DEPENDENCIES="\
 			curl \
-            mysql-client \
-            mysql-server \
+            debconf-utils \
+            mc
             "
 
-COPY scripts /scripts
-COPY setup/database.sql /var/db/database.sql
+COPY . /app
+WORKDIR /app
 
-WORKDIR home
-
-RUN /bin/bash /scripts/10-install-build-deps.sh \
- && /bin/bash /scripts/30-database.sh \
- && /bin/bash /scripts/40-credentials.sh \
- && /bin/bash /scripts/50-cleanup.sh \
- && rm -rf /scripts
+RUN /bin/bash /app/scripts/10-install-build-deps.sh \
+ && /bin/bash /app/scripts/30-database.sh \
+ && /bin/bash /app/scripts/40-credentials.sh \
+ && /bin/bash /app/scripts/50-cleanup.sh \
+ && rm -rf /app
 
 # Create credentials with Docker ENV variables
 # setup/credentials.sh ${APP_ID} ${APP_NAME}
