@@ -27,11 +27,7 @@ validateArguments $# 4 "Usage: ${code} 31-database-install.sh ${bold_begin}DB_NA
 ########################################################################################################################
 # Install database
 #
-messageInfo "Install dependencies"
-
-apt-get -y install debconf-utils
-
-#export DEBIAN_FRONTEND=noninteractive
+messageInfo "Install database"
 debconf-set-selections <<< "mysql-server mysql-server/root_password password $4"
 debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $4"
 apt-get -y install mysql-server mysql-client \
@@ -60,8 +56,13 @@ Q8="FLUSH PRIVILEGES;"
 mysqlQuery $4 "\${Q1}" "\${Q2}" "\${Q3}" "\${Q4}" "\${Q5}" "\${Q6}" "\${Q7}" "\${Q8}"
 
 # External access
-sed -i "s/\(bind-address[\t ]*\)=.*/\1= 0.0.0.0/" /etc/mysql/my.cnf
-sed -i "s/key_buffer/key_buffer_size/g" /etc/mysql/my.cnf
+sed -i "s/\(bind-address[\t ]*\)=.*/\1= 0.0.0.0/" /etc/mysql/my.cnf \
+	&& messageOk "External access on database is allowed." \
+	|| messageError 1 "Something went wrong on updating database configuration."
+
+sed -i "s/key_buffer/key_buffer_size/g" /etc/mysql/my.cnf \
+	&& messageOk "Key buffer size on database is set." \
+	|| messageError 1 "Something went wrong on updating database configuration."
 
 ########################################################################################################################
 # Additional configuration
@@ -74,7 +75,9 @@ echo '[mysqld]
 key_buffer_size = 16M
 myisam-recover-options = BACKUP
 bind-address = 0.0.0.0
-' > /etc/mysql/conf.d/dockertest.cnf
+' > /etc/mysql/conf.d/dockertest.cnf \
+	&& messageOk "Addition configuration file for database created." \
+	|| messageError 1 "Something went wrong on creating additional configuration file for database."
 
 
 ########################################################################################################################

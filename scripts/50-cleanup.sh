@@ -10,6 +10,12 @@ set -ex
 # @author     André Lademann <vergissberlin@googlemail.com>
 # @license    http://opensource.org/licenses/MIT
 
+########################################################################################################################
+# Include user interface and helper
+#
+. ../lib/console.sh
+messageInfo "Cleanup container"
+
 # apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false $buildDeps
 # apt-get c# lean
 # rm -rf /usr/src/*

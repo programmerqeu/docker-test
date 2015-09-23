@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `dname` DEFAULT CHARSET=utf8;
-USE `dname`;
+CREATE DATABASE IF NOT EXISTS `docker` DEFAULT CHARSET=utf8;
+USE `docker`;
 
 --
--- Table structure for table `Lehrveranstaltung`
+-- Table structure for table `docker`
 --
 
 DROP TABLE IF EXISTS `docker`;
