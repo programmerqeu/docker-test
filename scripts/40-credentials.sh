@@ -10,19 +10,18 @@ set -ex
 # @author     André Lademann <vergissberlin@googlemail.com>
 # @license    http://opensource.org/licenses/MIT
 
-echo "All parameter: ${*}"
-echo "0 parameter: ${0}"
-echo "1 parameter: ${1}"
 
-printf '{
-	"dockertest": {
-		"appenv": "%s",
-		"appid": "%s",
-		"makenv": "%s"
-	}
-}\n'\
-	$1 \
-	$1 \
-	$1 \
-	> "/home/${1}_cred.json"
+########################################################################################################################
+# Include user interface and helper
+#
+. ../lib/console.sh
 
+messageInfo "Create credentials"
+
+## Create credential directory
+mkdir -p /var/credentials \
+	&& messageOk "Credential directory created." \
+	|| messageError 1 "Something went wrong on creation of credential directory"
+
+# Import database atructure
+/bin/bash /scripts/41-credentials-sample.sh $APP_ID $DB_USER $DB_PASS
