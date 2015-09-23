@@ -35,6 +35,11 @@ apt-get -y install mysql-server mysql-client \
     || messageError 65 "Error while installation MySQL-Server."
 
 
+service mysql start \
+    && messageOk "MySQL started." \
+    || messageError 65 "Something went wrong on start MySQL-Server."
+sleep 5
+
 ########################################################################################################################
 # Configure database
 #
@@ -72,9 +77,7 @@ messageInfo "Add additional database configurations"
 # Enable remote access (default is localhost only, we change this
 # otherwise our database would not be reachable from outside the container)
 echo '[mysqld]
-key_buffer_size = 16M
 myisam-recover-options = BACKUP
-bind-address = 0.0.0.0
 ' > /etc/mysql/conf.d/dockertest.cnf \
 	&& messageOk "Addition configuration file for database created." \
 	|| messageError 1 "Something went wrong on creating additional configuration file for database."
@@ -85,4 +88,8 @@ bind-address = 0.0.0.0
 #
 messageInfo "Restart MySQL"
 
-service mysql restart
+service mysql restart \
+    && messageOk "MySQL restarted." \
+    || messageError 65 "Something went wrong on restart MySQL-Server."
+
+sleep 5

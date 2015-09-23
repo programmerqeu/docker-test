@@ -31,6 +31,6 @@ printf '{
 	$1 \
 	$2 \
 	$3 \
-	> "../${1}_cred.json" \
-	&& messageInfo "Credential file ${code}../${1}_cred.json${norm} saved." \
+	> "/var/credentials/${1}_cred.json" \
+	&& messageOk "Credential file ${code}/var/credentials/${1}_cred.json${norm} saved." \
 	|| messageError 1 "Something went wrong on creating credential sample file."

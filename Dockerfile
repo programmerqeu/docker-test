@@ -17,16 +17,16 @@ ENV APP_ID="dockertest" \
 	DB_USER="docker" \
 	DB_PASS="docker" \
 	DB_PASS_ROOT="docker" \
-	DB_FILE="/setup/database.sql" \
+	DB_FILE="/app/setup/database.sql" \
 	DB_ALLOW_EMPTY_PASSWORD="true" \
 	BUILD_DEPENDENCIES="\
 			curl \
             debconf-utils \
-            mc
-            "
+            mc" \
+    TERM=xterm
 
 COPY . /app
-WORKDIR /app
+WORKDIR /app/scripts
 
 RUN /bin/bash /app/scripts/10-install-build-deps.sh \
  && /bin/bash /app/scripts/30-database.sh \
@@ -45,6 +45,8 @@ RUN chmod +x /usr/local/bin/app.sh
 VOLUME /var/lib/mysql
 
 EXPOSE 3306
+
+WORKDIR /root
 
 # Create credentials with param ENV vairables
 ENTRYPOINT /usr/local/bin/app.sh

@@ -1,5 +1,4 @@
 #!/bin/bash
-set -ex
 
 # dockertest
 #
@@ -24,4 +23,4 @@ mkdir -p /var/credentials \
 	|| messageError 1 "Something went wrong on creation of credential directory"
 
 # Import database atructure
-/bin/bash /scripts/41-credentials-sample.sh $APP_ID $DB_USER $DB_PASS
+/bin/bash ./41-credentials-sample.sh $APP_ID $DB_USER $DB_PASS
