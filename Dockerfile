@@ -28,17 +28,14 @@ ENV APP_ID="dockertest" \
 COPY . /app
 WORKDIR /app/scripts
 
-RUN /bin/bash /app/scripts/10-install-build-deps.sh \
+RUN /bin/bash /app/scripts/10-dependencies.sh \
  && /bin/bash /app/scripts/30-database.sh \
  && /bin/bash /app/scripts/40-credentials.sh \
  && /bin/bash /app/scripts/50-cleanup.sh \
  && rm -rf /app
 
-# Create credentials with Docker ENV variables
-# setup/credentials.sh ${APP_ID} ${APP_NAME}
-
 # Install starting script
-COPY scripts/60-app.sh /usr/local/bin/app.sh
+COPY app/app.sh /usr/local/bin/app.sh
 RUN chmod +x /usr/local/bin/app.sh
 
 # Data
